@@ -1,5 +1,6 @@
-@KG
+
 Feature: Search And Assert A Brand and add an item to the cart
+  @KG1
   Scenario: search for a brand and assert results
     Given I am on the homepage
     When I select brand category from the header
@@ -7,6 +8,7 @@ Feature: Search And Assert A Brand and add an item to the cart
     And I select "DOLCE & GABBANA" brand from the list
     Then I should see the list of products from "DOLCE & GABBANA"
 
+  @KG2
     Scenario: add an item to the cart, check out and assert
     Given I select men category from the header
     And I am on PDP

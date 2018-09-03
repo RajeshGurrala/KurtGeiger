@@ -16,6 +16,7 @@ public class Mens_ShoePageKG {
     private String ONE_ITEM_ADDED_TO_CART="//span[@class='skiplinks_count'][text()='1']";
     private String GO_TO_BAG="//a[text()='Go to bag']";
     private String ITEM_THUMBNAIL_IN_PRODUCTS_PAGE="//img[contains(@src,'thumbnail')]";
+    private String PAGE_LOADER="//button[@class='switch-domain btn-rounded']";
     public static String shoeSize;
     public static String shoeBrandandColor;
 
@@ -29,7 +30,8 @@ public class Mens_ShoePageKG {
         List<WebElement> shoes = driver.findElements(By.xpath(ITEM_THUMBNAIL_IN_PRODUCTS_PAGE));
        for(WebElement pick:shoes){
            shoeBrandandColor=pick.getAttribute("alt");
-       pick.click();
+           utils.waitForElementVisible(By.xpath(PAGE_LOADER));
+           pick.click();
        break;}
 utils.waitForElementVisible(By.xpath(ADD_TO_BAG_BUTTON));
         assertThat(utils.getTextOfElement(By.xpath(ADD_TO_BAG_BUTTON)),is(equalToIgnoringCase("Add to bag")));
