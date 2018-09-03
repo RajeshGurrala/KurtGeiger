@@ -11,7 +11,7 @@ import static org.hamcrest.Matchers.equalToIgnoringCase;
 public class Mens_ShoePageKG {
     ElementUtils utils=new ElementUtils();
     private String URL_FOR_MENS_SHOES="https://www.kurtgeiger.es/men/shoes";
-    private String HEADER_TEXT_ON_MENS_SHOES_PAGE="//h1[text()='Men / Shoes']";
+    private String HEADER_TEXT_ON_MENS_SHOES_PAGE="//div[@class='category-title']//h1";
     private String ADD_TO_BAG_BUTTON="//span[text()='Add to bag']";
     private String ONE_ITEM_ADDED_TO_CART="//span[@class='skiplinks_count'][text()='1']";
     private String GO_TO_BAG="//a[text()='Go to bag']";
@@ -20,31 +20,33 @@ public class Mens_ShoePageKG {
     public static String shoeBrandandColor;
 
     public void assertMens_ShoePage(){
-        utils.assertURL(URL_FOR_MENS_SHOES);
-        assertThat(utils.getTextOfElement(By.xpath(HEADER_TEXT_ON_MENS_SHOES_PAGE)),is(equalToIgnoringCase("Men / Shoes")));
+        utils.assertURL(URL_FOR_MENS_SHOES).
+        waitForElementVisible(By.xpath(HEADER_TEXT_ON_MENS_SHOES_PAGE));
+        assertThat(utils.getTextOfElement(By.xpath(HEADER_TEXT_ON_MENS_SHOES_PAGE)),is(equalToIgnoringCase("Men's Shoes")));
     }
     public void clickAShoeAndSelectColourAndSize() throws InterruptedException {
         //here all the thumb nails of products that were shown on the search screen are looped via foreach loop and click action is performed
         List<WebElement> shoes = driver.findElements(By.xpath(ITEM_THUMBNAIL_IN_PRODUCTS_PAGE));
-        for(WebElement pick:shoes){
-            shoeBrandandColor=pick.getAttribute("alt");
-            pick.click();
-            break; }
+       for(WebElement pick:shoes){
+           shoeBrandandColor=pick.getAttribute("alt");
+       pick.click();
+       break;}
+utils.waitForElementVisible(By.xpath(ADD_TO_BAG_BUTTON));
         assertThat(utils.getTextOfElement(By.xpath(ADD_TO_BAG_BUTTON)),is(equalToIgnoringCase("Add to bag")));
         //this is the method that randomly selects a different shoe size in each run
-        String[] range={"40","41","42","43","44","45","46"};
+        String[] range={"42","43","44","45","46"};
         shoeSize=utils.pickAtRandomWithInRange(range);
         utils.clickBtn(By.xpath("//span[text()='"+shoeSize+"']"));
 
     }
-    public void addItemToCart() throws InterruptedException {
+    public void addItemToCart()  {
         utils.clickBtn(By.xpath(ADD_TO_BAG_BUTTON));
 
     }
     public void assertItemAddToCart(){
         utils.waitForElementVisible(By.xpath(ONE_ITEM_ADDED_TO_CART));
     }
-    public void navigateToCheckOut() throws InterruptedException {
+    public void navigateToCheckOut()  {
         utils.clickBtn(By.xpath(GO_TO_BAG));
     }
 

@@ -7,7 +7,7 @@ Feature: Search And Assert A Brand and add an item to the cart
     And I select "DOLCE & GABBANA" brand from the list
     Then I should see the list of products from "DOLCE & GABBANA"
 
-    Scenario: add an item to the check out and assert
+    Scenario: add an item to the cart, check out and assert
     Given I select men category from the header
     And I am on PDP
     When I select any colour and size for the chosen men category

@@ -30,7 +30,7 @@ public class BrandPageKG {
     }
     public void assertSearchedItemsOnBrandPage(String brand){
         //here after clicking Dolce & Gabbana tab the items brought up on the screen are screened for the text D & G. if the items
-        //brought on the screen are not from D & G assertion fails
+        //shown on the screen are not from D & G, assertion fails
             List<WebElement> SearchedItems=driver.findElements(By.xpath(BRAND_NAME_ON_SEARCHED_ITEM));
             for(WebElement check:SearchedItems){
                 Assert.assertThat(check.getText(), Matchers.is((brand)));

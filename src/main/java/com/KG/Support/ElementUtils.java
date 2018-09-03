@@ -10,9 +10,7 @@ import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.*;
 import java.io.*;
 import java.util.*;
-import java.util.NoSuchElementException;
 import static com.KG.Support.BaseClass.driver;
-import static java.util.concurrent.TimeUnit.SECONDS;
 import static org.junit.Assert.*;
 
 public class ElementUtils {
@@ -23,31 +21,27 @@ public class ElementUtils {
 
 
     //click button with fluent wait
-    public void clickBtn(By by) throws InterruptedException {
-        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
-                .withTimeout(5, SECONDS)
-                .pollingEvery(5, SECONDS)
-                .ignoring(NoSuchElementException.class);
-        WebElement element=wait.until(ExpectedConditions.elementToBeClickable(by));
-       try{element.click();}
-       catch (Exception e){
-           Thread.sleep(1000);
-           element.click();
+    public ElementUtils clickBtn(By by)  {
+        WebDriverWait wait=new WebDriverWait(driver, 5);
+        WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
+            element.click();
+return this;
        }
 
-        }
     public String getTextOfElement(By by) {
         return driver.findElement(by).getText();
 
     }
-    public void assertURL(String expectedURL) {
+    public ElementUtils assertURL(String expectedURL) {
         String actualURL = driver.getCurrentUrl();
         assertEquals(expectedURL, actualURL);
+        return this;
     }
 
     //explicit wait element to be present
-    public void waitForElementVisible(By by) {
+    public ElementUtils waitForElementVisible(By by) {
         new WebDriverWait(driver,20).until(ExpectedConditions.presenceOfElementLocated(by));
+        return this;
     }
 
     public String pickAtRandomWithInRange(String[] lot) {
@@ -75,7 +69,7 @@ public class ElementUtils {
     //browser selector choose between chrome and phantomJS. specify the desired browser in the config.properties
     public WebDriver browser() {
 
-        if (getProperty("browser").equalsIgnoreCase("chrome")) {
+        if (getProperty("BROWSER").equalsIgnoreCase("chrome")) {
             ChromeDriverManager.getInstance().setup();
             ChromeOptions options = new ChromeOptions();
             options.addArguments("start-maximized");

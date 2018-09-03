@@ -55,7 +55,7 @@ public class SearchAndAssertABrand_And_AddItemToCart_stepDef {
     }
 
     @And("^I add the product to the bag$")
-    public void iAddTheProductToTheBag() throws InterruptedException {
+    public void iAddTheProductToTheBag()  {
         webModel.getMensShoePageKG().addItemToCart();
 
     }
@@ -67,7 +67,7 @@ public class SearchAndAssertABrand_And_AddItemToCart_stepDef {
     }
 
     @And("^I click 'Proceed to Checkout'$")
-    public void iClickProceedToCheckout() throws InterruptedException {
+    public void iClickProceedToCheckout() {
         webModel.getMensShoePageKG().navigateToCheckOut();
 
     }
