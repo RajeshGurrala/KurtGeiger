@@ -1,7 +1,7 @@
 INRO- This is a JAVA based maven framework. It has 2 BDD test scenarios developed for a popular online fashion brand, KurtGeiger. Recommended IDE for the project is Intellij. Project has been developed and tested on a windows platform. tools used in the project- Selenium, Cucumber, JUnit and Hamcrest.
 
 
-PROJECT STRUCTURE: partial page Object model
+PROJECT STRUCTURE: partial page Object model.
 Under the SRC lies 2 directories; I) main and II) test
 
 I) main has Pages and Support packages. Pages house all the classes that pertain to web pages. Support has 3 classes; 1) BaseClass, 2) ElementUtils and 3) WebModel
