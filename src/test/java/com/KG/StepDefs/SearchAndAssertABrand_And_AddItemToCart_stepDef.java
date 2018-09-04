@@ -1,12 +1,14 @@
 package com.KG.StepDefs;
+
 import com.KG.Support.WebModel;
 import cucumber.api.java.en.*;
 
 public class SearchAndAssertABrand_And_AddItemToCart_stepDef {
 
-    WebModel webModel=new WebModel();
+    WebModel webModel = new WebModel();
+
     @Given("^I am on the homepage$")
-    public void iAmOnTheHomepage()  {
+    public void iAmOnTheHomepage() {
         webModel.getDashBoardPageKG().assetDashBoardPage("https://www.kurtgeiger.es/");
 
     }
@@ -17,7 +19,7 @@ public class SearchAndAssertABrand_And_AddItemToCart_stepDef {
     }
 
     @Then("^I should see the list of brands$")
-    public void iShouldSeeTheListOfBrands()  {
+    public void iShouldSeeTheListOfBrands() {
         webModel.getBrandPageKG().assertBrandPage();
 
     }
@@ -55,13 +57,13 @@ public class SearchAndAssertABrand_And_AddItemToCart_stepDef {
     }
 
     @And("^I add the product to the bag$")
-    public void iAddTheProductToTheBag()  {
+    public void iAddTheProductToTheBag() {
         webModel.getMensShoePageKG().addItemToCart();
 
     }
 
     @Then("^I can see the bag with single item$")
-    public void iCanSeeTheBagWithSingleItem()  {
+    public void iCanSeeTheBagWithSingleItem() {
         webModel.getMensShoePageKG().assertItemAddToCart();
 
     }

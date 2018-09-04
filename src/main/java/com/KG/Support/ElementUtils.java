@@ -1,4 +1,5 @@
 package com.KG.Support;
+
 import io.github.bonigarcia.wdm.ChromeDriverManager;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.*;
@@ -8,8 +9,10 @@ import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.*;
+
 import java.io.*;
 import java.util.*;
+
 import static com.KG.Support.BaseClass.driver;
 import static org.junit.Assert.*;
 
@@ -21,17 +24,18 @@ public class ElementUtils {
 
 
     //click button with fluent wait
-    public ElementUtils clickBtn(By by)  {
-        WebDriverWait wait=new WebDriverWait(driver, 5);
+    public ElementUtils clickBtn(By by) {
+        WebDriverWait wait = new WebDriverWait(driver, 5);
         WebElement element = wait.until(ExpectedConditions.elementToBeClickable(by));
-            element.click();
-return this;
-       }
+        element.click();
+        return this;
+    }
 
     public String getTextOfElement(By by) {
         return driver.findElement(by).getText();
 
     }
+
     public ElementUtils assertURL(String expectedURL) {
         String actualURL = driver.getCurrentUrl();
         assertEquals(expectedURL, actualURL);
@@ -40,7 +44,7 @@ return this;
 
     //explicit wait element to be present
     public ElementUtils waitForElementVisible(By by) {
-        new WebDriverWait(driver,20).until(ExpectedConditions.presenceOfElementLocated(by));
+        new WebDriverWait(driver, 20).until(ExpectedConditions.presenceOfElementLocated(by));
         return this;
     }
 
@@ -51,6 +55,7 @@ return this;
         return randomPick;
 
     }
+
     //get properties method
     public String getProperty(String key) {
 
@@ -78,13 +83,14 @@ return this;
             Capabilities caps = new DesiredCapabilities();
             ((DesiredCapabilities) caps).setJavascriptEnabled(true);
             ((DesiredCapabilities) caps).setCapability("takesScreenshot", true);
-            ((DesiredCapabilities) caps).setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY,"headless\\phantomjs.exe");
+            ((DesiredCapabilities) caps).setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, "headless\\phantomjs.exe");
             driver = new PhantomJSDriver(caps);
 
 
         }
         return driver;
     }
+
     //screen capture upon failure. the images are stored under output folder. and also the report.html is a consolidated report of the results
     public void captureScreenShot(String screenShotName) throws IOException {
         TakesScreenshot ts = (TakesScreenshot) driver;
@@ -93,7 +99,7 @@ return this;
         System.out.println("screenShot taken");
     }
 
-    }
+}
 
 
 
